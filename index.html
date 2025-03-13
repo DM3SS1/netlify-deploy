@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+    <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+    <script type="text/javascript" src="src/AVC_theme/AVC_theme.js"></script>
+    <script type="text/javascript" src="src/echarts-wordcloud.min.js"></script>
+		<style>
+			html, body {
+				background-image: linear-gradient(to bottom, rgba(249, 211, 227, 0.65), rgba(225, 118, 138, 1)), url(img/1.JPG);				
+				background-size:cover;
+    			background-repeat:no-repeat;
+				background-position: right;
+				/* background-color:  #F9D3E3; */
+				width: 100%;
+				height: 100%;}
+			#main {
+				position: absolute;
+				z-index: 100;
+				width: 100%;
+				/* height: 100%; */
+				aspect-ratio: 1/1;
+				/* box-shadow: 0 0 15px 3px aqua; */
+				top:50%;
+				transform: translateY(-50%);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main"></div>
+	</body>
+	<script>
+		var myChart = echarts.init(document.getElementById('main'));
+		
+    const colorList = [
+            "#007cc8",
+            "#00b578",
+            "#e8763c",
+            "#f478ff",
+            "#7a65e5",
+            "#76c900",
+            "#e09a0d",
+            "#ff7ab2",
+            "#149aa6",
+            "#12c730"
+    ];
+
+		// 数据源
+    var data =[];
+    var testData = [
+    '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的',    '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的',   '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的',    '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的',    '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '以后只认错', '不要理论', '不要争论', '不说别的，只认错', '不说别的只认错', '我有原罪', '是我的错', '对不起', '我错了', '对不起', '我有罪', '老婆就是用来哄的', '媛媛', '能能', '老婆', '亲爱的', '宝宝', '乖宝宝', '媛媛', '能能', '老婆', '亲爱的', '宝宝', '乖宝宝', '媛媛', '能能', '老婆', '亲爱的', '宝宝', '乖宝宝', '媛媛', '能能', '老婆', '亲爱的', '宝宝', '乖宝宝', '媛媛', '能能', '老婆', '亲爱的', '宝宝', '乖宝宝', '媛媛', '能能', '老婆', '亲爱的', '宝宝', '乖宝宝', '媛媛', '能能', '老婆', '亲爱的', '宝宝', '乖宝宝', '曹宝宝', '曹宝宝', '曹宝宝', '曹宝宝', '曹宝宝'
+
+
+
+
+    ];
+		
+
+    for (var i = 0; i < testData.length; i++) {
+    data.push({
+      name: testData[i],
+      value: (testData.length - i) * 20,
+    });
+    }
+
+    		// 求出最大值用来计算透明度
+		var max = 0
+		// 方法一
+		for (let item of data) {
+			if(item.value > max){
+				max = item.value
+			}
+		}
+		// 方法二，利用map方法
+		// max = Math.max(...keyWords.map(item=>item.value))
+		
+		// 自定义图片
+		var maskImage = new Image();
+		// 图片在iconfont上找，图片的黑色区域表示被填充
+		maskImage.src = "data:image/png;base64,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"
+		
+		var option = {
+			// backgroundColor: '#F9D3E3',
+			tooltip: {
+				show: true
+			},
+			series: [{
+				type: 'wordCloud',
+				// 单词间隔的大小
+				gridSize: 0, 
+				// 字体大小范围
+				sizeRange: [8, 38],
+				// 文字旋转角度范围
+				rotationRange: [-45, 45],
+				// 自定义词云图形状
+				maskImage: maskImage,
+				// 形状有(circle)圆形(默认)、(cardioid)心形，(diamond)菱形，
+				// (triangle-forward)三角形向前，(triangle)三角形，(pentagon)五边形和(star)星形。*/
+				shape: 'star',
+    //   textStyle: {
+    //     color: function () {
+    //       let index = Math.floor(Math.random() * colorList.length);
+    //       return colorList[index];
+    //     }
+    //   },
+				textStyle: {
+					color: function(e) {
+						var a = [
+							255,
+							255,
+							255,
+							(e.data.value / max) < 0.3 ? 0.3 : e.data.value
+						]
+						return 'rgba(' + a.join(',') + ')'
+					}
+				},
+				//设置显示区域的位置以及大小
+				left: 'center',
+				top: 'center',
+				width: '100%',
+				height: '100%',
+				// 源数据
+				data: data,
+				// 鼠标放上样式
+				emphasis: {
+					textStyle: {
+						fontWeight: 'bold',
+						color: '#E1768A',
+					}
+				}
+			}]
+		}
+
+		// myChart.setOption(option)
+		// 图片加载好以后再设置配置
+		maskImage.onload = function() {
+			myChart.setOption(option)
+		}
+	</script>
+</html>
